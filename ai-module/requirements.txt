@@ -1,0 +1,11 @@
+flask
+flask-cors
+opencv-python-headless
+face-recognition
+numpy
+Pillow
+scipy
+dlib
+imutils
+python-dotenv
+gunicorn

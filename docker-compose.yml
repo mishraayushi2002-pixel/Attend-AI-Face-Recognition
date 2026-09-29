@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      FLASK_URL: http://flask_ai:5001
+      DATABASE_URL: postgresql://attendai:attendai@postgres:5432/attendance_system
+    depends_on: [postgres, flask_ai]
+  flask_ai:
+    build: ./ai-module
+    ports: ["5001:5001"]
+    volumes: ["face_encodings:/app/encodings"]
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: attendance_system
+      POSTGRES_USER: attendai
+      POSTGRES_PASSWORD: attendai
+    volumes: ["database:/var/lib/postgresql/data"]
+    ports: ["5432:5432"]
+volumes:
+  database:
+  face_encodings:
